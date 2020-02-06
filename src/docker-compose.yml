@@ -1,0 +1,32 @@
+version: "3.7"
+services:
+    db:
+        image: mysql
+        container_name: JoinfoDB
+        volumes:
+            - /var/lib/mysql
+        environment:
+            - MYSQL_ROOT_PASSWORD=root
+            - MYSQL_DATABASE=JoinfoDB
+        ports:
+            - 3306:3306
+        expose:
+            - 3306
+    node:
+        image: node
+        container_name: NodeJS
+        user: node
+        restart: always
+        working_dir: /home/node/app
+        volumes:
+            - ../:/home/node/app
+        environment:
+            - NODE_ENV=development
+            - DBHOST=db
+        ports:
+            - 5001:3000
+        command: "npm install"
+        links:
+            - db
+        depends_on: 
+            - db

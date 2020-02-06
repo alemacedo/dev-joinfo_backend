@@ -17,12 +17,20 @@ module.exports = {
         primaryKey: true,
         allowNull: false
       },
-      firstName: Sequelize.STRING,
-      lastName: Sequelize.STRING,
+      firstName: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      lastName: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
       birthdate: Sequelize.DATE,
       email: {
-        email: Sequelize.STRING
-        // unique: true
+        email: {
+          type: Sequelize.STRING,
+          allowNull: false
+        }
       }
     });
 
@@ -36,6 +44,6 @@ module.exports = {
       Example:
       return queryInterface.dropTable('users');
     */
-   return queryInterface.dropTable('User');
+    return queryInterface.dropTable('User');
   }
 };
